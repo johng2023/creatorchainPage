@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import {
   motion,
   useScroll,
@@ -150,6 +151,15 @@ const CreatorChainLanding = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  // Formspree setup
+  const [formspreeState, formspreeSubmit] = useForm("xdkpgdlw");
+  useEffect(() => {
+    if (formspreeState.succeeded) {
+      setSubmitted(true);
+      provideFeedback("success");
+    }
+  }, [formspreeState.succeeded]);
+
   // Typing animation for hero text
   const { displayText: heroText, isComplete: heroComplete } =
     useTypingAnimation("Protect Your Digital Assets", 80);
@@ -191,9 +201,8 @@ const CreatorChainLanding = () => {
       return;
     }
 
-    setSubmitted(true);
-    provideFeedback("success");
-    console.log("Form submitted:", formData);
+    // Submit to Formspree
+    formspreeSubmit(e);
   };
 
   const problemStats = [
@@ -466,7 +475,6 @@ const CreatorChainLanding = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Problem Statement */}
       <section className="relative py-20 px-6 bg-gradient-to-b from-transparent via-red-950/10 to-transparent">
         <motion.div
           className="max-w-6xl mx-auto"
@@ -543,7 +551,6 @@ const CreatorChainLanding = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Solution Features */}
       <section className="relative py-20 px-6">
         <motion.div
           className="max-w-6xl mx-auto"
@@ -608,7 +615,6 @@ const CreatorChainLanding = () => {
             ))}
           </div>
 
-          {/* Enhanced How It Works Steps */}
           <motion.div className="mb-20" variants={itemVariants}>
             <h3 className="text-3xl font-bold text-center text-white mb-12">
               Simple 3-Step Process
@@ -653,7 +659,6 @@ const CreatorChainLanding = () => {
         </motion.div>
       </section>
 
-      {/* Enhanced Waitlist Form */}
       <section
         id="waitlist-form"
         className="relative py-20 px-6 bg-gradient-to-b from-transparent via-indigo-950/10 to-transparent"
@@ -678,23 +683,12 @@ const CreatorChainLanding = () => {
 
           {!submitted ? (
             <motion.form
-              name="waitlist"
+              action="https://formspree.io/f/xdkpgdlw"
               method="POST"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur border border-white/10 rounded-2xl p-8"
               variants={itemVariants}
-              netlify
             >
-              {/* Hidden field for Netlify */}
-              <input type="hidden" name="form-name" value="waitlist" />
-              <div style={{ display: "none" }}>
-                <label>
-                  Don't fill this out if you're human:{" "}
-                  <input name="bot-field" />
-                </label>
-              </div>
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -715,6 +709,11 @@ const CreatorChainLanding = () => {
                     }`}
                     placeholder="your.email@example.com"
                     whileFocus={{ scale: 1.02 }}
+                  />
+                  <ValidationError
+                    prefix="Email"
+                    field="email"
+                    errors={formspreeState.errors}
                   />
                   {formData.email && (
                     <motion.div
