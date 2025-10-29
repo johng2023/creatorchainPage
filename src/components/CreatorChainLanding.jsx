@@ -680,6 +680,7 @@ const CreatorChainLanding = () => {
             <motion.form
               name="waitlist"
               method="POST"
+              action="https://formspree.io/f/xdkpgdlw"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
