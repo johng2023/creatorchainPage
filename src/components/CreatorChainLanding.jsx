@@ -680,12 +680,12 @@ const CreatorChainLanding = () => {
             <motion.form
               name="waitlist"
               method="POST"
-              action="https://formspree.io/f/xdkpgdlw"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur border border-white/10 rounded-2xl p-8"
               variants={itemVariants}
+              netlify
             >
               {/* Hidden field for Netlify */}
               <input type="hidden" name="form-name" value="waitlist" />
