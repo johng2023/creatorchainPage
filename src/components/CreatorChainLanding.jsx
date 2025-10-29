@@ -98,48 +98,6 @@ const useTypingAnimation = (text, speed = 100) => {
   return { displayText, isComplete };
 };
 
-// Animated counter hook
-const useAnimatedCounter = (end, duration = 2000) => {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById(`counter-${end}`);
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [end]);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    let startTime;
-    const animate = (currentTime) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-
-      setCount(Math.floor(progress * end));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [isVisible, end, duration]);
-
-  return count;
-};
-
 // Floating Action Button
 const FloatingActionButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -196,11 +154,6 @@ const CreatorChainLanding = () => {
   const { displayText: heroText, isComplete: heroComplete } =
     useTypingAnimation("Protect Your Digital Assets", 80);
 
-  // Animated counters
-  const theftPercentage = useAnimatedCounter(73);
-  const revenueLoss = useAnimatedCounter(2.8);
-  const detectionTime = useAnimatedCounter(6);
-
   // Form validation
   useEffect(() => {
     const isValid = formData.email.includes("@") && formData.email.length > 5;
@@ -245,22 +198,22 @@ const CreatorChainLanding = () => {
 
   const problemStats = [
     {
-      value: `${theftPercentage}%`,
-      label: "of creators report content theft",
-      source: "Creator Economy Report 2024",
-      id: "counter-73",
+      value: "2.2B",
+      label: "copyright claims processed by YouTube in 2024",
+      source: "YouTube Transparency Report 2024",
+      id: "counter-2.2",
     },
     {
-      value: `$${revenueLoss}B`,
-      label: "annual revenue lost to content theft",
-      source: "Digital Content Protection Study",
-      id: "counter-2.8",
+      value: "$75B",
+      label: "annual global losses to digital piracy",
+      source: "ElectroIQ Piracy Statistics 2024",
+      id: "counter-75",
     },
     {
-      value: `${detectionTime} weeks`,
-      label: "average time to detect stolen content",
-      source: "Platform Analytics Research",
-      id: "counter-6",
+      value: "141B",
+      label: "visits to piracy sites in 2023 alone",
+      source: "MUSO & Kearney Research Study",
+      id: "counter-141",
     },
   ];
 
@@ -440,7 +393,7 @@ const CreatorChainLanding = () => {
                 <AlertTriangle className="w-4 h-4 text-red-400" />
               </motion.div>
               <span className="text-red-300 text-sm font-medium">
-                Content theft costs creators billions annually
+                Digital piracy causes $75B in annual global losses
               </span>
             </motion.div>
 
@@ -448,7 +401,7 @@ const CreatorChainLanding = () => {
               className="text-5xl md:text-7xl font-black mb-8 leading-tight"
               variants={itemVariants}
             >
-              <span className="block text-white mb-2">Protect Your</span>
+              <span className="block text-white mb-2">Protect Your Brand</span>
               <motion.span
                 className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
                 animate={{
@@ -473,8 +426,9 @@ const CreatorChainLanding = () => {
               variants={itemVariants}
             >
               The first blockchain-powered platform that automatically protects
-              your content, monitors for theft, and helps you recover stolen
-              revenue.
+              your social media content, monitors video platforms for theft, and
+              helps you recover stolen revenue before DMCA systems are
+              overwhelmed.
             </motion.p>
 
             <motion.div
@@ -539,8 +493,9 @@ const CreatorChainLanding = () => {
               The Content Theft Crisis
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Every day, creators lose revenue to content thieves who repost,
-              monetize, and profit from stolen work.
+              With over 2.2 billion copyright claims processed annually and
+              platforms overwhelmed by DMCA requests, creators need automated
+              protection that works before theft occurs.
             </p>
           </motion.div>
 
@@ -589,10 +544,11 @@ const CreatorChainLanding = () => {
                   Current Solutions Fall Short
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  Manual content monitoring is time-consuming and ineffective.
-                  Platform reporting systems are slow, and by the time stolen
-                  content is removed, thieves have already profited. You need
-                  proactive protection, not reactive cleanup.
+                  With YouTube processing over 2 billion copyright claims
+                  annually, DMCA systems are overwhelmed. Manual monitoring is
+                  ineffective, and by the time stolen content is removed,
+                  thieves have already profited. You need proactive blockchain
+                  protection, not reactive cleanup.
                 </p>
               </div>
             </div>
