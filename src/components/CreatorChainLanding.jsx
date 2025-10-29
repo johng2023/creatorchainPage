@@ -355,19 +355,6 @@ const CreatorChainLanding = () => {
                 <Sparkles className="w-5 h-5 text-purple-400" />
               </motion.div>
             </motion.div>
-            <motion.button
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2.5 rounded-lg font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 relative overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <span className="relative z-10">Request Demo</span>
-            </motion.button>
           </div>
         </div>
       </motion.nav>
